@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sinh viên</title>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+    <h2>Danh sách sinh viên</h2>
+    <a class="btn btn-primary" th:href="@{/sinhVien/add}">Thêm mới</a>
+    <form action="/sinhVien/search" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Tên sinh viên" aria-label="Search" name="hoTen">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Mã sinh viên</th>
+            <th>Tên sinh viên</th>
+            <th>Email</th>
+            <th>Ngày sinh</th>
+            <th>Lớp</th>
+            <th>Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sinhVien : ${dsSinhVien}">
+            <td th:text="${sinhVien.mssv}"></td>
+            <td th:text="${sinhVien.hoTen}"></td>
+            <td th:text="${sinhVien.email}"></td>
+            <td th:text="${sinhVien.ngaySinh}"></td>
+            <td th:if="${sinhVien.lop != null}" th:text="${sinhVien.lop.tenLop}"></td>
+            <td>
+                <a th:href="@{/sinhVien/edit/{id}(id=${sinhVien.mssv})}">Sửa</a> |
+                <a th:href="@{/sinhVien/delete/{id}(id=${sinhVien.mssv})}" onclick="return confirm ('Bạn có muốn xoá?')">Xoá</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>

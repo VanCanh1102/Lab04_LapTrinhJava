@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách môn học</title>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+    <h2>Danh sách lớp</h2>
+    <a class="btn btn-primary" th:href="@{/monHoc/add}">Thêm mới</a>
+    <form action="/monHoc/search" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Tên môn học" aria-label="Search" name="tenMonHoc">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Mã môn học</th>
+            <th>Tên môn học</th>
+            <th>Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="monHoc : ${dsMonHoc}">
+            <td th:text="${monHoc.maMon}"></td>
+            <td th:text="${monHoc.tenMonHoc}"></td>
+            <td>
+                <a th:href="@{/monHoc/edit/{id}(id=${monHoc.maMon})}">Sửa</a> |
+                <a th:href="@{/monHoc/delete/{id}(id=${monHoc.maMon})}" onclick="return confirm ('Bạn có muốn xoá?')">Xoá</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>

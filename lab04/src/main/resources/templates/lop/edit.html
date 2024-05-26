@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa lớp</title>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+    <h2>Chỉnh sửa lớp</h2>
+    <form th:action="@{/lop/edit}" th:object="${lop}" method="post">
+        <div class="col-6 mb-3">
+            <label class="form-label" for="maLop">Mã lớp</label>
+            <input type="text" class="form-control" th:field="*{maLop}" id="maLop" readonly>
+            <span th:if="${#fields.hasErrors('maLop')}" th:errors="*{maLop}" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="tenLop">Tên lớp</label>
+            <input type="text" class="form-control" th:field="*{tenLop}" id="tenLop">
+            <span th:if="${#fields.hasErrors('tenLop')}" th:errors="*{tenLop}" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Lưu">
+        <br>
+        <a th:href="@{/lop}">Trở về</a>
+    </form>
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>
